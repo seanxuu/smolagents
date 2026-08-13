@@ -1,19 +1,3 @@
-
-<!--Copyright 2024 The HuggingFace Team. All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
-the License. You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
-an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
-specific language governing permissions and limitations under the License.
-
-⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be
-rendered properly in your Markdown viewer.
-
--->
 # 模型
 
 <Tip warning={true}>
@@ -67,28 +51,28 @@ print(model([{"role": "user", "content": [{"type": "text", "text": "Ok!"}]}], st
 ```
 
 > [!TIP]
-> 您必须在机器上安装 `transformers` 和 `torch`。如果尚未安装，请运行 `pip install smolagents[transformers]`。
+> 您必须在机器上安装 `transformers` 和 `torch`。如果尚未安装，请运行 `pip install 'smolagents[transformers]'`。
 
 [[autodoc]] TransformersModel
 
-### HfApiModel
+### InferenceClientModel
 
-`HfApiModel` 封装了 huggingface_hub 的 [InferenceClient](https://huggingface.co/docs/huggingface_hub/main/en/guides/inference)，用于执行 LLM。它支持 HF 的 [Inference API](https://huggingface.co/docs/api-inference/index) 以及 Hub 上所有可用的[Inference Providers](https://huggingface.co/blog/inference-providers)。
+`InferenceClientModel` 封装了 huggingface_hub 的 [InferenceClient](https://huggingface.co/docs/huggingface_hub/main/en/guides/inference)，用于执行 LLM。它支持 HF 的 [Inference API](https://huggingface.co/docs/api-inference/index) 以及 Hub 上所有可用的[Inference Providers](https://huggingface.co/blog/inference-providers)。
 
 ```python
-from smolagents import HfApiModel
+from smolagents import InferenceClientModel
 
 messages = [
   {"role": "user", "content": [{"type": "text", "text": "Hello, how are you?"}]}
 ]
 
-model = HfApiModel()
+model = InferenceClientModel()
 print(model(messages))
 ```
 ```text
 >>> Of course! If you change your mind, feel free to reach out. Take care!
 ```
-[[autodoc]] HfApiModel
+[[autodoc]] InferenceClientModel
 
 ### LiteLLMModel
 
@@ -101,32 +85,32 @@ messages = [
   {"role": "user", "content": [{"type": "text", "text": "Hello, how are you?"}]}
 ]
 
-model = LiteLLMModel("anthropic/claude-3-5-sonnet-latest", temperature=0.2, max_tokens=10)
+model = LiteLLMModel(model_id="anthropic/claude-3-5-sonnet-latest", temperature=0.2, max_tokens=10)
 print(model(messages))
 ```
 
 [[autodoc]] LiteLLMModel
 
-### OpenAIServerModel
+### OpenAIModel
 
 此类允许您调用任何 OpenAIServer 兼容模型。
 以下是设置方法（您可以自定义 `api_base` URL 指向其他服务器）：
 ```py
 import os
-from smolagents import OpenAIServerModel
+from smolagents import OpenAIModel
 
-model = OpenAIServerModel(
+model = OpenAIModel(
     model_id="gpt-4o",
     api_base="https://api.openai.com/v1",
     api_key=os.environ["OPENAI_API_KEY"],
 )
 ```
 
-[[autodoc]] OpenAIServerModel
+[[autodoc]] OpenAIModel
 
-### AzureOpenAIServerModel
+### AzureOpenAIModel
 
-`AzureOpenAIServerModel` 允许您连接到任何 Azure OpenAI 部署。
+`AzureOpenAIModel` 允许您连接到任何 Azure OpenAI 部署。
 
 下面是设置示例，请注意，如果已经设置了相应的环境变量，您可以省略 `azure_endpoint`、`api_key` 和 `api_version` 参数——环境变量包括 `AZURE_OPENAI_ENDPOINT`、`AZURE_OPENAI_API_KEY` 和 `OPENAI_API_VERSION`。
 
@@ -135,9 +119,9 @@ model = OpenAIServerModel(
 ```py
 import os
 
-from smolagents import AzureOpenAIServerModel
+from smolagents import AzureOpenAIModel
 
-model = AzureOpenAIServerModel(
+model = AzureOpenAIModel(
     model_id = os.environ.get("AZURE_OPENAI_MODEL"),
     azure_endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT"),
     api_key=os.environ.get("AZURE_OPENAI_API_KEY"),
@@ -145,7 +129,7 @@ model = AzureOpenAIServerModel(
 )
 ```
 
-[[autodoc]] AzureOpenAIServerModel
+[[autodoc]] AzureOpenAIModel
 
 ### MLXModel
 
@@ -161,6 +145,6 @@ print(model([{"role": "user", "content": "Ok!"}], stop_sequences=["great"]))
 ```
 
 > [!TIP]
-> 您必须在机器上安装 `mlx-lm`。如果尚未安装，请运行 `pip install smolagents[mlx-lm]`。
+> 您必须在机器上安装 `mlx-lm`。如果尚未安装，请运行 `pip install 'smolagents[mlx-lm]'`。
 
 [[autodoc]] MLXModel

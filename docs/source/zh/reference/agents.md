@@ -1,19 +1,3 @@
-
-<!--Copyright 2024 The HuggingFace Team. All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
-the License. You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
-an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
-specific language governing permissions and limitations under the License.
-
-⚠️ Note that this file is in Markdown but contain specific syntax for our doc-builder (similar to MDX) that may not be
-rendered properly in your Markdown viewer.
-
--->
 # Agents（智能体）
 
 <Tip warning={true}>
@@ -42,10 +26,6 @@ Smolagents 是一个实验性的 API，可能会随时发生变化。由于 API 
 
 [[autodoc]] ToolCallingAgent
 
-### ManagedAgent
-
-_此类自 1.8.0 起已被弃用：现在您只需向普通代理传递 `name` 和 `description` 属性即可使其可被管理代理调用。_
-
 ### stream_to_gradio
 
 [[autodoc]] stream_to_gradio
@@ -53,7 +33,7 @@ _此类自 1.8.0 起已被弃用：现在您只需向普通代理传递 `name` �
 ### GradioUI
 
 > [!TIP]
-> 您必须安装 `gradio` 才能使用 UI。如果尚未安装，请运行 `pip install smolagents[gradio]`。
+> 您必须安装 `gradio` 才能使用 UI。如果尚未安装，请运行 `pip install 'smolagents[gradio]'`。
 
 [[autodoc]] GradioUI
 
